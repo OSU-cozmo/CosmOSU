@@ -1,3 +1,3 @@
-import OSUCozmoLibrary as robot;
+import CozmOSU as robot;
 
 robot.init();

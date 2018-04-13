@@ -1,4 +1,4 @@
-# OSU-Cozmo-Library
+# CozmOSU
 
 ## Installation
 
