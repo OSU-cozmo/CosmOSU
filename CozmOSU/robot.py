@@ -1,2 +1,5 @@
+import Cozmo
+
+
 def init():
-    print("Init Called From robot.py");
+    #Do nothing
