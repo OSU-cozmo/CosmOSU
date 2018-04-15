@@ -1,7 +1,8 @@
-import cozmo;
+import cozmo
 from .Actions import Actions
-#from .Drive import Drive
-class Robot (Actions):
+from .Drive import Drive
+
+class Robot (Actions, Drive):
     robot = False
     _startOn = False
 
