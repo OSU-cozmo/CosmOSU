@@ -7,7 +7,7 @@ class Robot (Actions, Drive):
     _startOn = False
 
     def __init__(self):
-        print()
+        print("Robot Class init finished")
 
     def start(self, startOn):
         self._startOn = startOn

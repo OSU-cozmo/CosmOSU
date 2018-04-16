@@ -6,6 +6,9 @@ class Drive(Driving, Navigation):
         #NO OP
         x = x
 
+    def driveTest(self):
+        print("drive test function: ")
+
     '''
     Predefine a set of actions in this class
     '''
