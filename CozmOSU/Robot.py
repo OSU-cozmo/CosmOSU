@@ -4,8 +4,6 @@ class Robot:
     robot = False
     _startOn = False
 
-    def __init__(self):
-        x = s #no op
     def start(self, startOn):
         self._startOn = startOn
         cozmo.run_program(self._begin)
