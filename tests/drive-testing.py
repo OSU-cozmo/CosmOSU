@@ -1,3 +1,3 @@
-import CozmOSU.Drive as drive;
+import CozmOSU.Drive as drive
 
-drive.test();
+drive.test()
