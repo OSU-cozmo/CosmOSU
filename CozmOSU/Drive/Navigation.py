@@ -1,3 +1,3 @@
-class Navigation:
-    def noop():
-        x = x
+from ..Robot import Robot
+import cozmo
+
