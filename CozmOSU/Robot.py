@@ -1,4 +1,4 @@
-import cozmo;
+import cozmo
 
 class Robot:
     robot = False

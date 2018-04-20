@@ -3,7 +3,9 @@ import cozmo
 from cozmo.util import degrees, distance_mm, speed_mmps
 
 def driveForward(self, distance, speed): #decide on units for this
-    self.robot.drive_straight(distance_mm(distance), speed_mmps(speed)).wait_for_completed()
+    realDistance = distance_mm(distance)
+    realSpeed = speed_mmps(speed)
+    self.robot.drive_straight(realDistance, realSpeed).wait_for_completed()
 
 def driveBothWheels(self, leftSpeed, rightSpeed, duration):
     self.robot.drive_wheels(speed_mmps(leftSpeed), speed_mmps(rightSpeed))
@@ -29,7 +31,7 @@ def turn(self, angle): #in degrees
 # def stop():
 
 ###################################################################
-# Functions Exported to Robot                                     #
+# Functions Exported to CozmoBot                                     #
 ###################################################################
 
 Robot.driveForward                  = driveForward
