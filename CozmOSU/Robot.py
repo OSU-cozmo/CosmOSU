@@ -3,7 +3,7 @@ import logging;
 class Robot:
     robot = -1
     _startOn = -1
-    dbg = __debug__
+    dbg = False
     log = -1
 
     """
@@ -45,14 +45,13 @@ class Robot:
 
     """
     Debug Toggle
-        Purpose: Turn on and off debugging. Cannot turn off debugging if it was
-                    toggled using -o
+        Purpose: Turn on and off debugging.
     """
     def debugToggle(self):
-        if not __debug__:
-            self.dbg = not self.dbg
-        else:
-            self.log.warning("Cannot turn off debugging when '-o' argument provided")
+        #if not __debug__:
+        self.dbg = not self.dbg
+    #    else:
+    #        self.log.warning("Cannot turn off debugging when '-o' argument provided")
 
     """
     Start (start on)
