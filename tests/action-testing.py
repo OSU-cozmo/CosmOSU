@@ -22,18 +22,18 @@ def liftTests(robot):
     robot.resetLift()
 
 def headTests(robot):
-    robot.debugToggle()
 
     degs = (int(MIN_HEAD_ANGLE.degrees), int(MAX_HEAD_ANGLE.degrees))
     rads = (MIN_HEAD_ANGLE.radians, MIN_HEAD_ANGLE.radians)
-    print("-----------------STARTING HEAD TESTS-----------------")
+
+    print("\n\t> STARTING HEAD TESTS\n")
     #should print warning
     robot.moveHead(-50)
 
     #Should be valid
     robot.moveHead(40)
 
-    print(">> Full range of motion test\n")
+#    print(">> Full range of motion test\n")
     # *degs is tuple expansion
     for x in range(*degs, 10):
         robot.moveHead(x)
