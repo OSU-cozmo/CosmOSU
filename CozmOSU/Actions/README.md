@@ -5,11 +5,13 @@
    - [x] Say (msg)
    - [x] moveLift(amount, speed=default)
    - [x] moveHead(amount, speed=default)
-   - [ ] setBackPackLights(color)
-   - [ ] setCubeLights(id, color)
+   - [x] setBackPackLights(color)
+   - [x] setCubeLights(id, color)
    - [ ] spinCubeLights(id, color)
    - [ ] blinkCubeLights(id, color)
    - [ ] animateCubeLights(id, * kwargs)
+   - [ ] Colors by name (global dictionary)
+   - [ ] turnOffLights
 
   ### Test
    - [ ] Say (msg)
