@@ -1,4 +1,4 @@
-def checkNegative(exp):
+def checkNegative(exp : str = ""):
     s = exp.split()
     final = ""
     first = True

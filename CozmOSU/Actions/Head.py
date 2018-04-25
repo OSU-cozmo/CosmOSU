@@ -1,15 +1,22 @@
+"""
+.. moduleauthor:: Mason Sidebottom <sidebotm@oregonstate.edu>
+"""
 from ..Robot import Robot
 import cozmo.util
 from cozmo.robot import MAX_HEAD_ANGLE, MIN_HEAD_ANGLE
 
-"""
-Move Head (degrees, speed)
-    Purpose: Moves the head to specified angle
-    Parameters: degrees -> int or float between -25 and 44.5 degrees
-                speed   -> int default(10)
-"""
-def moveHead(self, degrees, speed = 10):
 
+def moveHead(self, degrees : float, speed : int = 10):
+    """Moves head to specifed position.
+
+    Arguments:
+        degrees: A float representing the angle at which to move to head to.
+            - 0 : straight forward.
+            - 44.5 : Maximum upward angle.
+            - -25 : Minimum downward angle.
+        speed: An integer representing the speed to move the head at.
+            - 10 default
+    """
     #get min and max degrees from library
     min = MIN_HEAD_ANGLE.degrees    #-25
     max = MAX_HEAD_ANGLE.degrees    #44.5
