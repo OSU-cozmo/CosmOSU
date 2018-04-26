@@ -15,7 +15,8 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('../CozmOSU'))
-
+# Some systems require this alternate path
+sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
 
@@ -72,6 +73,8 @@ exclude_patterns = []
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
+# Documentation in submodules ends up with deceptive naming with this enabled
+add_module_names = False
 
 # -- Options for HTML output -------------------------------------------------
 
