@@ -32,10 +32,13 @@ class Robot:
 
 
 
-    def debug(self, msg):
-        """
-            Purpose: If debugging is toggled, prints the message to the sreen
-            Parameter: Message to debug
+    def debug(self, msg : str):
+        """If debugging is toggled, prints the message to the sreen
+
+        Arguments:
+            msg : Message to debug throught the logger.
+
+        *If debugging is not toggled, the message will not be shown*
         """
         #Dont always show debbugging messages
         if self.dbg:
@@ -53,10 +56,10 @@ class Robot:
 
 
     def start(self, startOn):
-        """
-            Purpose: create the cozmo robot and begin executing the function provided
-            Parameter: reference to function where execution should begin
-            PreConditions: Function must exist, should also take one parameter of type this class
+        """Create the cozmo robot and begin executing the function provided
+
+            Arguments:
+                startOn : A reference to function where execution should begin
         """
         self._startOn = startOn
 

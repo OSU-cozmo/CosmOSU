@@ -14,9 +14,12 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../CozmOSU'))
+#sys.path.insert(0, os.path.abspath('../CozmOSU'))
 # Some systems require this alternate path
 sys.path.insert(0, os.path.abspath('..'))
+
+#one of my computers needs this
+sys.path.insert(0, os.path.abspath('../..'))
 
 # -- Project information -----------------------------------------------------
 
@@ -81,7 +84,7 @@ add_module_names = False
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'classic'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the

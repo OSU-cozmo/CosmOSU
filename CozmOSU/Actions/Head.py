@@ -15,7 +15,7 @@ def moveHead(self, degrees : float, speed : int = 10):
             - 44.5 : Maximum upward angle.
             - -25 : Minimum downward angle.
         speed: An integer representing the speed to move the head at.
-            - 10 default
+            - 10 (default)
     """
     #get min and max degrees from library
     min = MIN_HEAD_ANGLE.degrees    #-25
@@ -40,13 +40,17 @@ def moveHead(self, degrees : float, speed : int = 10):
 #Use this as a method for robot
 Robot.moveHead = moveHead
 
-"""
-Move Head Rad (radians, speed)
-    Purpose: Moves the head to specified angle
-    Parameters: radians -> float between min and max
-                speed   -> int default(10)
-"""
-def moveHeadRad(self, rads, speed = 10):
+def moveHeadRad(self, rads : float, speed : int = 10):
+    """Move head to specified position using radians
+
+    Arguments:
+        rads: float between min and max
+            - 0 : Straight forward
+            - 0.xxxx : Maximum upward angle
+            - -0.xxxx : Minimum downward angle
+        speed: An integer representing the speed to move the head at.
+            - 10 (default)
+    """
 
     #get min and max degrees from library
     min = MIN_HEAD_ANGLE.radians
@@ -72,12 +76,9 @@ def moveHeadRad(self, rads, speed = 10):
 Robot.moveHeadRad = moveHeadRad
 
 
-"""
-Reset Head
-    Purpose: Puts head to 0 degrees, straight forward
-    PostConditions: Head is looking straight forward
-"""
 def resetHead(self):
+    """Restores the head to a forward position"""
+    
     self.moveHead(0)
 
 #Use this as a method for robot
