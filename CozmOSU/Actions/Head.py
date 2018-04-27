@@ -1,6 +1,3 @@
-"""
-.. moduleauthor:: Mason Sidebottom <sidebotm@oregonstate.edu>
-"""
 from ..Robot import Robot
 import cozmo.util
 from cozmo.robot import MAX_HEAD_ANGLE, MIN_HEAD_ANGLE
@@ -41,7 +38,7 @@ def moveHead(self, degrees : float, speed : int = 10):
 Robot.moveHead = moveHead
 
 def moveHeadRad(self, rads : float, speed : int = 10):
-    """Move head to specified position using radians
+    """Move head to specified position using radians.
 
     Arguments:
         rads: float between min and max
@@ -77,8 +74,8 @@ Robot.moveHeadRad = moveHeadRad
 
 
 def resetHead(self):
-    """Restores the head to a forward position"""
-    
+    """Restores the head to a forward position."""
+
     self.moveHead(0)
 
 #Use this as a method for robot

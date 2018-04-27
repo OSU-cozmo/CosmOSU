@@ -2,13 +2,15 @@ from ..Robot import Robot
 from ..helpers import *
 
 
-"""
-Get Cube By ID (id)
-    Purpose : gets a cube object from the cozmo world using the ID
-    Parameters : integer between 1 and 3
-    Return : Respective light cube
-"""
 def getCubeByID(self, id : int):
+    """Gets a cube object from the cozmo world using the ID provided.
+
+    Arguments:
+        id : An integer representing a cube ID. Can only be 1, 2, or 3.
+
+    Returns:
+        A light cube object from the Cozmo library.
+    """
     #Check that ID is in range
     if not 1 <= id <= 3:
         #log issue
@@ -22,14 +24,20 @@ def getCubeByID(self, id : int):
 #Use this as a method for robot
 Robot.getCubeByID = getCubeByID;
 
-"""
-Set Cube Color (id, color)
-
-    Purpose : Sets all lights on cube to color provided
-    Parameters: ID -> integer, id of the cube
-                Color -> tuple in form (r, g, b)
-"""
 def setCubeColor(self, id : int, color : tuple):
+    """Sets all lights on cube to a specific color.
+
+    Arguments:
+        id : An integer representing a cube id.
+
+        color : A tuple representing a rgb color. ex ``(255, 0, 0)``.
+
+    .. code-block:: python
+
+        #sets cube 1 lights to red
+        robot.setCubeColor(1, (255, 0, 0))
+
+    """
     #get the cube
     cube = self.getCubeByID(id)
 
@@ -50,13 +58,20 @@ def setCubeColor(self, id : int, color : tuple):
 Robot.setCubeColor = setCubeColor
 
 
-"""
-Set Cube Color Hex (id, color)
-    Purpose : sets the color of a cube
-    Parameters: ID -> int, id of the cube
-                color -> string, in format "0xFFF" or "0xFFFFFF"
-"""
 def setCubeColorHex(self, id : int, color : str):
+    """Sets all lights on cube to a specific color using Hex.
+
+    Arguments:
+        id : An integer representing a cube id.
+
+        color : A string that is a hex representation of a color. Use form ``'0xFFF'`` or ``'0xFFFFFF'``
+
+    .. code-block:: python
+
+        #sets cube 1 lights to red
+        robot.setCubeColorHex(1, '0xFF000')
+
+    """
     #convert color to RGB
     col = hexToRBG(color)
 
@@ -75,15 +90,24 @@ def setCubeColorHex(self, id : int, color : str):
 #Use this as a method for robot
 Robot.setCubeColorHex = setCubeColorHex
 
-"""
-Set Cube Color RGB
-    Purpose : set the color of a cube.
-    Parameters: id -> int, id of the cube
-                red -> int, 0-255
-                green -> int, 0-255
-                blue -> int, 0-255
-"""
 def setCubeColorRGB(self, id : int, red : int, green : int, blue : int):
+    """Sets all lights on cube to a specific color using expanded RGB.
+
+    Arguments:
+        id : An integer representing a cube id.
+
+        red : An integer representing the red value of a color. Must be between 0 and 255.
+
+        green : An integer representing the green value of a color. Must be between 0 and 255.
+
+        blue : An integer representing the blue value of a color. Must be between 0 and 255.
+
+    .. code-block:: python
+
+        #sets cube 1 lights to red
+        robot.setCubeColorRGB(1, 255, 0, 0)
+
+    """
     #create color tuple
     color = (red, green, blue)
 
@@ -93,30 +117,51 @@ def setCubeColorRGB(self, id : int, red : int, green : int, blue : int):
 #Use this as a method for robot
 Robot.setCubeColorRGB = setCubeColorRGB
 
-"""
-Set Cube Color HSV (id, h, s, v)
-    Purpose : set color of cube using HSV
-    Parameters: ID -> int, cube to use
-                h -> int, 0-360
-                s -> float, 0-1
-                v -> float, 0-1
-"""
+
 def setCubeColorHSV(self, id : int, h : int, s : float, v : float):
+    """Sets all lights on cube to a specific color using HSV.
+
+    Arguments:
+        id : An integer representing a cube id.
+
+        h : An integer representing Hue of a color. Must be between 0 and 360.
+
+        s : A float representing the saturation a color. Must be between 0 and 1.
+
+        v : A float representing value, or lightness, of a color. Must be between 0 and 1.
+
+    .. code-block:: python
+
+        #sets cube 1 lights to red
+        robot.setCubeColorHSV(1, 0, 1, 1)
+
+    """
     #set cube color, after converting to RGB
     self.setCubeColor(id, hsvToRGB((h,s,v)))
 
 #Use this as a method for robot
 Robot.setCubeColorHSV = setCubeColorHSV
 
-"""
-Set Cube Corners (id, colors)
-    Purpose : set the color of individual corner lights
-    Parameters: ID -> int, cube to use
-                Colors -> list of length 4, where each index
-                            is an rgb tupleself.
-                            ex [(255,0,0) ... ]
-"""
 def setCubeCorners(self, id : int, colors : list):
+    """Set the each light on a cube individually.
+
+    Arguments:
+        id : An integer representing a cube id.
+
+        colors : A list comprised of exactly four rgb tuples
+
+    .. code-block:: python
+
+        #Set cube 1's corners to Red, Green, Blue, and Yellow
+
+        colors = [  (255, 0, 0),    #red
+                    (0, 255, 0),    #green
+                    (0, 0, 255),    #blue
+                    (255, 255, 0)]  #yellow
+
+        robot.setCubeCorners(1, colors)
+
+    """
     #get cube
     cube = self.getCubeByID(id)
     #check that cube does exist
@@ -135,14 +180,31 @@ def setCubeCorners(self, id : int, colors : list):
 #Use this as a method for robot
 Robot.setCubeCorners = setCubeCorners
 
-"""
-Set Cube Corners Hex (id, hex1, hex2, hex3, hex4)
-    Purpose : set the cube corners using a hex values
-    Parameters: ID -> int, cube to use
-                HexX -> Hex color string in format '0xFFF' or '0xFFFFFF'
-"""
+
 def setCubeCornersHex(self, id : int, hex1 : str, hex2 : str, hex3 : str, hex4 : str):
     #create an array of RGB colors using map
+    """Set the each light on a cube individually using hex.
+
+    Arguments:
+        id : An integer representing a cube id.
+
+        hex1 : A string that is a hex representation of a color to use for corner 1. Use form ``'0xFFF'`` or ``'0xFFFFFF'``
+
+        hex2 : A string that is a hex representation of a color to use for corner 2. Use form ``'0xFFF'`` or ``'0xFFFFFF'``
+
+        hex3 : A string that is a hex representation of a color to use for corner 3. Use form ``'0xFFF'`` or ``'0xFFFFFF'``
+
+        hex4 : A string that is a hex representation of a color to use for corner 4. Use form ``'0xFFF'`` or ``'0xFFFFFF'``
+
+
+    .. code-block:: python
+
+        #Set cube 1's corners to Red, Green, Blue, and Yellow
+
+        robot.setCubeCornersHex(1, '0xFF0000', '0x00FF00', '0x0000FF', '0xFFFF00')
+
+    """
+
     colors = list(map(hexToRBG, [hex1, hex2, hex3, hex4]))
 
     #call set cube corners
@@ -151,12 +213,15 @@ def setCubeCornersHex(self, id : int, hex1 : str, hex2 : str, hex3 : str, hex4 :
 #Use this as a method for robot
 Robot.setCubeCornersHex = setCubeCornersHex
 
-"""
-Set All Backpack Lights (color)
-    Purpose : set all the backpack lights on cozmo to one color
-    Parameter : Color -> tuple, in form (r, g, b)
-"""
+
 def setAllBackpackLights(self, color : tuple):
+    """Sets all the lights on Cozmo's back to the specified color.
+
+    Arguments:
+
+        color : A tuple representing a RGB color. ex. ``(255, 0, 0)``
+
+    """
     #Debug the action
     self.debug("Setting backpack lights to %s" % color)
 
@@ -166,26 +231,34 @@ def setAllBackpackLights(self, color : tuple):
 #Use this as a method for robot
 Robot.setAllBackpackLights = setAllBackpackLights
 
-"""
-Set All Backpack Lights RGB (r, g, b)
-    Purpose : set all backpack lights to one color
-    Parameters: r -> int, red value 0 - 255
-                g -> int, green value 0 - 255
-                b -> int, blue value 0 - 255
-"""
+
 def setAllBackpackLightsRGB(self, r : int, g : int, b : int):
+    """Sets all the lights on Cozmo's back to the specified color using expanded RGB.
+
+    Arguments:
+
+        r : An integer represeting the red value of a color. Must be between 0 and 255.
+
+        g : An integer represeting the green value of a color. Must be between 0 and 255.
+
+        b : An integer represeting the blue value of a color. Must be between 0 and 255.
+
+    """
     #create tuple of RGB then call setAllBackpackLights
     self.setAllBackpackLights((r,g,b))
 
 #Use this as a method for robot
 Robot.setAllBackpackLightsRGB = setAllBackpackLightsRGB
 
-"""
-Set All Backpack Lights Hex (color)
-    Purpose : set all backpack lights to one color using hex
-    Parameters: color -> str, hex color val in format '0xFFF' or '0xFFFFFF'
-"""
+
 def setAllBackpackLightsHex(self, color : str):
+    """Sets all the lights on Cozmo's back to the specified color using Hex
+
+    Arguments:
+
+        color :  A string that is a hex representation of a color. Use form ``'0xFFF'`` or ``'0xFFFFFF'``
+
+    """
     #create rgb color
     col = hexToRBG(color)
 
@@ -204,32 +277,57 @@ def setAllBackpackLightsHex(self, color : str):
 #Use this as a method for robot
 Robot.setAllBackpackLightsHex = setAllBackpackLightsHex
 
-"""
-Set All Backpack Lights HSV (h, s, v)
-    Purpose : Set all backpack lights to one color usign HSV
-    Parameters: h -> int, hue value 0-360
-                s -> float, saturation value 0 - 1
-                v -> float, value 0 - 1
-"""
+
 def setAllBackpackLightsHSV(self, h : int, s : float, v : float):
+    """Sets all the lights on Cozmo's back to the specified color using HSV.
+
+    Arguments:
+
+        h : An integer representing Hue of a color. Must be between 0 and 360.
+
+        s : A float representing the saturation a color. Must be between 0 and 1.
+
+        v : A float representing value, or lightness, of a color. Must be between 0 and 1.
+
+    """
     #convert to RGB then call set all backpack lights
     self.setAllBackpackLights(hsvToRGB((h,s,v)));
 
 #Use this as a method for robot
 Robot.setAllBackpackLightsHSV = setAllBackpackLightsHSV
 
-"""
-Set Backpack Lights (colors)
-    Purpose : Set each individual light on the backpack.
-    Parameters: Colors -> list, length 3 or 5
-        index : 0 -> Front          index : 0 -> Left
-                1 -> Center                 1 -> Front
-                2 -> Back                   2 -> Center
-                                            3 -> Back
-                                            4 -> Right
-    Note : Left and Right lights only support shades of red
-"""
+
 def setBackpackLights(self, colors : list):
+    """Set all the lights on Cozmo's back individually.
+
+    .. note::
+
+        The Left and Right lights only support shades of red.
+
+    Arguments:
+
+        colors : A list containing exactly 3 or 5 RGB tuples.
+            If the list is of length 3, the indexes pertain to the following lights:
+                - 0 : Front
+                - 1 : Center
+                - 2 : Back
+            If the list is of length 5, the indexes pertain to the following lights:
+                - 0 : Left
+                - 1 : Front
+                - 2 : Center
+                - 3 : Back
+                - 4 : Right
+
+    .. code-block:: python
+
+        #Set the backpack lights to red, green, and blue
+
+        colors = [  (255, 0, 0),    #red
+                    (0, 255, 0),    #green
+                    (0, 0, 255)]    #blue
+
+        robot.setBackpackLights(colors)
+    """
     #if list is not correct length
     if len(colors) not in [3,5]:
         #warn the user

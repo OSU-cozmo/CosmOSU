@@ -4,13 +4,16 @@ from cozmo.robot import MAX_LIFT_HEIGHT, MIN_LIFT_HEIGHT
 #To do, add funcitonality for mm and inches
 
 
-"""
-Move Lift (height, speed)
-    Purpose: Move lift to a ratio of max height
-    Parameters: height -> float between 0 and 1 inclusive
-                speed  -> int > 0 (default 25)
-"""
 def moveLift(self, height, speed = 25):
+    """Moves lift to a specified height.
+
+    Arguments:
+        height : A float representing the height to set the lift to.
+            - 0 : On the ground
+            - 1 : Maximum height
+        speed : An integer representing the speed to move the lift at.
+            - 10 (default)
+    """
     #check if in range
     if not 0 <= height <= 1:
         #log issue
@@ -26,12 +29,9 @@ def moveLift(self, height, speed = 25):
 #Use this as a method for robot
 Robot.moveLift = moveLift
 
-"""
-Reset Lift
-    Purpose: Puts lift back to the ground
-"""
 def resetLift(self):
-        self.moveLift(0)
+    """Puts the lift back to the ground."""
+    self.moveLift(0)
 
 #Use this as a method for robot
 Robot.resetLift = resetLift

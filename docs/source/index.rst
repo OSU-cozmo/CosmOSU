@@ -3,31 +3,30 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Robot Class
+CozmOSU
 ***********
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-General
-=======
+   Actions <actions.rst>
+
+Robot Class
+===========
 
 .. automodule:: CozmOSU
 
   .. autoclass:: Robot
-    :members:
 
-Actions
-=======
-.. autofunction:: moveHead
+    .. automethod:: debugToggle
 
-.. autofunction:: moveHeadRad
+    .. automethod:: start
 
-.. autofunction:: resetHead
+
+
 
 Indices and tables
 ==================
-
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`

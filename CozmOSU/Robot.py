@@ -8,9 +8,7 @@ class Robot:
 
 
     def __init__(self):
-        """
-            purpose: Initializes an instance of the robot object.
-        """
+        """Initializes an instance of the robot object."""
         #Adding a logger to the robot class
         #easier to quicky indicate errors/warnings
         #specific to the robot
@@ -46,9 +44,7 @@ class Robot:
 
 
     def debugToggle(self):
-        """
-            Purpose: Turn on and off debugging.
-        """
+        """Turn on and off debugging."""
         #if not __debug__:
         self.dbg = not self.dbg
     #    else:
