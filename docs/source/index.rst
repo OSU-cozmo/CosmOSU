@@ -26,7 +26,7 @@ Installation
 
   Then in the root directory run:
 
-  ``pip install .``
+  ``pip install -e .``
 
 Hello World
 =============
