@@ -7,23 +7,42 @@ CozmOSU
 ***********
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
+   Robot <robot.rst>
    Actions <actions.rst>
-
-Robot Class
-===========
-
-.. automodule:: CozmOSU
-
-  .. autoclass:: Robot
-
-    .. automethod:: debugToggle
-
-    .. automethod:: start
+   Examples <examples.rst>
 
 
 
+
+
+
+Installation
+============
+
+  Clone the repository_.
+
+  .. _repository : https://github.com/OSU-cozmo/CosmOSU
+
+  Then in the root directory run:
+
+  ``pip install .``
+
+Hello World
+=============
+
+  .. code-block:: python
+
+
+      import CozmOSU as Robot
+
+      robot = Robot.Robot();
+
+      def main(cozmo : Robot.Robot):
+
+          cozmo.say("Hello World");
+
+      robot.start(main);
 
 Indices and tables
 ==================
