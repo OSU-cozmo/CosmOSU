@@ -14,6 +14,8 @@ Speech
 
   .. autofunction:: say
 
+  .. autofunction:: sayMath
+
 Lift
 ====
 

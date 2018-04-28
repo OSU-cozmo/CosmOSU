@@ -1,12 +1,8 @@
 from ..Robot import Robot
 
-"""
-Say (message):
-    Purpose: Robot will audibly say the message provided
-    Parameters: Message as a string
-"""
+
 def say(self, msg : str):
-    """Cozmo will say the message
+    """Cozmo will say the message.
 
     Arguments:
 
@@ -27,7 +23,7 @@ def say(self, msg : str):
 Robot.say = say
 
 def sayMath(self, msg : str):
-    """Cozmo will say the message, containing math.
+    """Cozmo will say the message. Should contain math.
 
     .. note::
 
