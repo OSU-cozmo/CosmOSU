@@ -5,16 +5,12 @@ Say (message):
     Purpose: Robot will audibly say the message provided
     Parameters: Message as a string
 """
-def say(self, msg : str, math : bool = True):
-    """Cozmo will audibly say back the message.
+def say(self, msg : str):
+    """Cozmo will say the message
 
     Arguments:
 
         msg : A string that cozmo will say.
-
-        math : A boolean representing whether the expression contains math or not.
-            - True (default) : msg contains math.
-            - False : msg does not conatin math.
 
     .. code-block:: python
 
@@ -22,10 +18,6 @@ def say(self, msg : str, math : bool = True):
 
     """
 
-    #substitute - for minus and negative
-    if math:
-        msg = checkNegative(msg)
-    #Debug
     self.debug("Robot is saying '%s'" % msg)
 
     #Execute say text action
@@ -34,6 +26,38 @@ def say(self, msg : str, math : bool = True):
 #Use this as a member function for robot
 Robot.say = say
 
+def sayMath(self, msg : str):
+    """Cozmo will say the message, containing math.
+
+    .. note::
+
+        Use this anytime the output should say 'minus' or 'negative' instead of 'dash'.
+
+    .. warning::
+
+        This will have undefined behavior if the message should say 'dash' and 'minus'/'negative'.
+
+    Arguments:
+
+        msg : A string that cozmo will say, containing math.
+
+    .. code-block:: python
+
+        robot.say("5 - 10 = -5")
+
+    """
+
+    #substitute - for minus and negative
+    msg = checkNegative(msg)
+
+    #Debug
+    self.debug("Robot is saying '%s'" % msg)
+
+    #Execute say text action
+    self.robot.say_text(msg).wait_for_completed()
+
+#Use this as a member function for robot
+Robot.sayMath = sayMath
 
 def checkNegative(exp : str) -> str:
     s = exp.split()
