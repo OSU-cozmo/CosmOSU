@@ -10,6 +10,7 @@ robot = CozmOSU.Robot()
 def speechTests(robot):
     robot.say("Hello World")
     robot.say("The sum of %d + %d is %d" % (5, 5, 10))
+    robot.say("%d - %d is %d" % (5, 10, 5 - 10))
 
 
 
@@ -75,7 +76,7 @@ def lightTests(robot):
     robot.setCubeCornersHex(1, '0x660FAA', '0xF0F0F0', '0xFF00FF', '0xABCDEF')
     time.sleep(3)
 
-robot.start(lightTests)
-#robot.start(speechTests);
+#robot.start(lightTests)
+robot.start(speechTests);
 #robot.start(liftTests);
 #robot.start(headTests)
