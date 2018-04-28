@@ -7,6 +7,7 @@
    - [x] moveHead(amount, speed=default)
    - [x] setBackPackLights(color)
    - [x] setCubeLights(id, color)
+   #### Revisit later
    - [ ] spinCubeLights(id, color)
    - [ ] blinkCubeLights(id, color)
    - [ ] animateCubeLights(id, * kwargs)
@@ -14,11 +15,11 @@
    - [ ] turnOffLights
 
   ### Test
-   - [ ] Say (msg)
-   - [ ] moveLift(amount, speed=default)
-   - [ ] moveHead(amount, speed=default)
-   - [ ] setBackPackLights(color)
-   - [ ] setCubeLights(id, color)
+   - [x] Say (msg)
+   - [x] moveLift(amount, speed=default)
+   - [x] moveHead(amount, speed=default)
+   - [x] setBackPackLights(color)
+   - [x] setCubeLights(id, color)
    - [ ] spinCubeLights(id, color)
    - [ ] blinkCubeLights(id, color)
    - [ ] animateCubeLights(id, * kwargs)
