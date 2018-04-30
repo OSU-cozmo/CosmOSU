@@ -1,5 +1,5 @@
-import cozmo;
-import logging;
+import cozmo
+import logging
 class Robot:
     robot = -1
     _startOn = -1
