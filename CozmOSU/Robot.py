@@ -63,6 +63,8 @@ class Robot:
         #Allows us to hide the actual Cozmo robot
         cozmo.run_program(self._begin)
 
+    def getRobot(self):
+        return self.robot
     def _begin(self, cozmo):
         """
             Purpose: provides a way to store the actual cozmo robot as a member of this class.
