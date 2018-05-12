@@ -22,7 +22,7 @@ def getCubeByID(self, id : int):
     return self.robot.world.get_light_cube(id)
 
 #Use this as a method for robot
-Robot.getCubeByID = getCubeByID;
+Robot.getCubeByID = getCubeByID
 
 def setCubeColor(self, id : int, color : tuple):
     """Sets all lights on cube to a specific color.
@@ -291,7 +291,7 @@ def setAllBackpackLightsHSV(self, h : int, s : float, v : float):
 
     """
     #convert to RGB then call set all backpack lights
-    self.setAllBackpackLights(hsvToRGB((h,s,v)));
+    self.setAllBackpackLights(hsvToRGB((h,s,v)))
 
 #Use this as a method for robot
 Robot.setAllBackpackLightsHSV = setAllBackpackLightsHSV

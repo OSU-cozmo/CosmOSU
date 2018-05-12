@@ -67,7 +67,7 @@ def moveHeadRad(self, rads : float, speed : int = 10):
     rads = cozmo.util.Angle(radians = rads)
 
     #Execute head movement action
-    self.robot.set_head_angle(rads, speed).wait_for_completed();
+    self.robot.set_head_angle(rads, speed).wait_for_completed()
 
 #Use this as a method for robot
 Robot.moveHeadRad = moveHeadRad
