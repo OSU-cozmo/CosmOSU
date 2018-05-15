@@ -70,13 +70,19 @@ class Robot:
             Purpose: provides a way to store the actual cozmo robot as a member of this class.
             Parameters: cozmo robot object
         """
+        
         #acts as a separator for the other output from cozmo
         print("\n\n\t------STARTING------\n")
 
         #store the robot
         self.robot = cozmo
 
+        for i in range(len(self.startEvts)):
+            self.startEvts[i]['function'](*self.startEvts[i]['params']) 
         #start the function
         self._startOn(self)
 
         print("\n\t------  DONE  ------\n\n")
+
+    def stayOnCharger(self):
+        cozmo.robot.Robot.drive_off_charger_on_connect = False

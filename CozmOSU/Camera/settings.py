@@ -1,18 +1,34 @@
 from ..Robot import Robot
+import cozmo
 
-
-def enableCamera(self,  viewer : bool = False, bool : color = True,):
+def enableCamera(self,  viewer : bool = False, color : bool = True):
     self.kwargDict['use_viewer'] = viewer
     self.kwargDict['force_viewer_on_top'] = viewer
-    self.startEvts.append((startSettings, (color))
+    callafter = {
+        "function" : self.cameraInit, 
+        "params": (color,)
+    }
+    self.startEvts.append(callafter)
 
 Robot.enableCamera = enableCamera
 
-def getCozmoCamera():
-    return self.robot.world.camera()
+def cameraInit(self, color):
+    self.robot.camera.image_stream_enabled = True
+    self.robot.camera.color_image_enabled = color
 
-Robot.getCozmoCamera = getCozmoCamera
+Robot.cameraInit = cameraInit
 
-def startSettings(color):
-    robot.camera.image_stream_enabled = True
-    robot.camera.color_image_enabled = color
+
+def watchForLines(self, range : int = 1):
+    callafter = {
+        "function" : self.createLineBinding, 
+        "params": (range,)
+    }
+    self.startEvts.append(callafter)
+
+Robot.watchForLines = watchForLines
+
+def createLineBinding(self, range : int = 1):
+    self.robot.add_event_handler(cozmo.world.EvtNewCameraImage, self.detectLines)
+
+Robot.createLineBinding = createLineBinding
