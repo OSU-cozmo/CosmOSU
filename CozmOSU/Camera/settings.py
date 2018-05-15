@@ -30,5 +30,6 @@ Robot.watchForLines = watchForLines
 
 def createLineBinding(self, range : int = 1):
     self.robot.add_event_handler(cozmo.world.EvtNewCameraImage, self.detectLines)
+    self.robot.camera.set_manual_exposure(67, 3)
 
 Robot.createLineBinding = createLineBinding
