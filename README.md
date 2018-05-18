@@ -17,5 +17,5 @@ pip install -e .
 
 ## Usage
 ```
-importCozmOSU as robot;
+import CozmOSU as robot;
 ```
