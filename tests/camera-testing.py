@@ -9,13 +9,13 @@ def main(robot : CozmOSU.Robot):
     robot.moveHead(-25)
     robot.moveLift(1)
     # robot.driveForward(10, 50)
-    time.sleep(5)
-
+    time.sleep(4)
+    robot.moveHead(0)
+    time.sleep(4)
 r = CozmOSU.Robot()
 
 r.stayOnCharger()
 r.watchForLines()
-r.debugToggle()
-r.enableCamera(True, True)
+r.enableCamera()
 r.start(main)
 
