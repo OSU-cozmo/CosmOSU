@@ -5,8 +5,8 @@ class Robot:
     _startOn = -1
     dbg = False
     log = -1
-
-
+    kwargDict = {}
+    startEvts = []
     def __init__(self):
         """Initializes an instance of the robot object."""
         #Adding a logger to the robot class
@@ -61,7 +61,7 @@ class Robot:
 
         #calls proxy to the the start on function
         #Allows us to hide the actual Cozmo robot
-        cozmo.run_program(self._begin)
+        cozmo.run_program(self._begin, **self.kwargDict)
 
     def getRobot(self):
         return self.robot
@@ -70,13 +70,19 @@ class Robot:
             Purpose: provides a way to store the actual cozmo robot as a member of this class.
             Parameters: cozmo robot object
         """
+        
         #acts as a separator for the other output from cozmo
         print("\n\n\t------STARTING------\n")
 
         #store the robot
         self.robot = cozmo
 
+        for i in range(len(self.startEvts)):
+            self.startEvts[i]['function'](*self.startEvts[i]['params']) 
         #start the function
         self._startOn(self)
 
         print("\n\t------  DONE  ------\n\n")
+
+    def stayOnCharger(self):
+        cozmo.robot.Robot.drive_off_charger_on_connect = False
