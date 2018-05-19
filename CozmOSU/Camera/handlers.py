@@ -36,6 +36,14 @@ def setHeadState(self, angle : float):
 
 Robot.setHeadState = setHeadState
 
+def isLineInZone(self, zone : int = 4):
+    if self.linesInZone is not None:
+        return self.linesInZone[str(zone)]
+    return None
+
+Robot.isLineInZone = isLineInZone
+
+
 def detectLines(self, event, *, image: cozmo.world.CameraImage, **kw):
     
     cvIm = np.array(image.raw_image)
@@ -53,9 +61,12 @@ def detectLines(self, event, *, image: cozmo.world.CameraImage, **kw):
     visLines = {'2' : None}
     if lines is not None and len(lines) > 0:
          for line in lines:
-             for h in line['lines']:
+            visLines[line['zone']] = False
+
+            for h in line['lines']:
+                
                 visLines[line['zone']] = True
-                y = getRealY(h, line['zone']);
+                y = getRealY(h, line['zone'])
                 cv2.line(wrp, (0, y), (w, y), (0, 0, 255), 2)
 
     storeImg(wrp, "warpLines")

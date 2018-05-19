@@ -6,12 +6,11 @@ def main(robot : CozmOSU.Robot):
     # robot.resetHead()
     # robot.resetLift()
 
-    robot.moveHead(-25)
-    robot.moveLift(1)
-    # robot.driveForward(10, 50)
-    time.sleep(4)
     robot.moveHead(0)
-    time.sleep(4)
+    robot.moveLift(1)
+    while not robot.isLineInZone(4):
+        robot.driveForward(15, 50)
+
 r = CozmOSU.Robot()
 
 r.stayOnCharger()

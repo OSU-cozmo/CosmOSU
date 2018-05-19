@@ -9,6 +9,7 @@ def enableCamera(self,  viewer : bool = False, color : bool = True):
         "params": (color,)
     }
     self.startEvts.append(callafter)
+    self.linesInZone = None
 
 Robot.enableCamera = enableCamera
 
