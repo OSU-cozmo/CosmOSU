@@ -1,4 +1,2 @@
-from .driving import *
-
-def test():
-    print("Drive Imported Successfully")
+from .Driving import *
+from .Navigation import *
