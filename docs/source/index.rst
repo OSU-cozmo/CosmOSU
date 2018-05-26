@@ -11,7 +11,7 @@ CozmOSU
    Robot <robot.rst>
    Actions <actions.rst>
    Examples <examples.rst>
-
+   Resources <resources.rst>
 
 
 

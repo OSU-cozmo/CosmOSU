@@ -7,6 +7,8 @@ class Robot:
     log = -1
     kwargDict = {}
     startEvts = []
+    visibleLines = []
+    lineIterations = 0
     def __init__(self):
         """Initializes an instance of the robot object."""
         #Adding a logger to the robot class

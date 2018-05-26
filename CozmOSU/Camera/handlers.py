@@ -36,12 +36,14 @@ def setHeadState(self, angle : float):
 
 Robot.setHeadState = setHeadState
 
-def isLineInZone(self, zone : int = 4):
-    if self.linesInZone is not None:
-        return self.linesInZone[str(zone)]
-    return None
+def areLinesVisible(self):
+    if len(self.visibleLines) > 0:
 
-Robot.isLineInZone = isLineInZone
+        temp = self.visibleLines
+        self.visibleLines = []
+        return temp
+    return None
+Robot.areLinesVisible = areLinesVisible
 
 
 def detectLines(self, event, *, image: cozmo.world.CameraImage, **kw):
@@ -58,21 +60,24 @@ def detectLines(self, event, *, image: cozmo.world.CameraImage, **kw):
     # lines = getProbablisticHoughLines(cvIm)
     h, w, z = wrp.shape
     
-    visLines = {'2' : None}
+    visLines = []
     if lines is not None and len(lines) > 0:
          for line in lines:
-            visLines[line['zone']] = False
-
             for h in line['lines']:
-                
-                visLines[line['zone']] = True
+                visLines.append(getRealY(h, line['zone']))
                 y = getRealY(h, line['zone'])
                 cv2.line(wrp, (0, y), (w, y), (0, 0, 255), 2)
 
     storeImg(wrp, "warpLines")
-    self.linesInZone = visLines
-
+    self.lineIterations = self.lineIterations + 1
+    self.updateLines(visLines)
 Robot.detectLines = detectLines 
+
+def updateLines(self, lines):
+    self.visibleLines = self.visibleLines + lines
+
+Robot.updateLines = updateLines
+
 
 def getAllLines(img):
     img = prepareImage(img)
@@ -91,7 +96,8 @@ def prepareImage(img):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     img = cv2.blur(img, (4, 4))
 
-    t, img = cv2.threshold(img, 200, 255, cv2.THRESH_BINARY)
+    t, img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
+    storeImg(img, "thresh1")
     img = cv2.adaptiveThreshold(img, 127, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 5, 1)
     storeImg(img, "postprocess")
     return img
