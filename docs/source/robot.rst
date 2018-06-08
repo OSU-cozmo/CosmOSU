@@ -9,6 +9,14 @@ Base Class
 
     .. autoclass:: Robot
 
+      .. automethod:: start
+
+      .. automethod:: getRobot
+
+      .. automethod:: stayOnCharger
+
       .. automethod:: debugToggle
 
-      .. automethod:: start
+      .. automethod:: debug
+
+

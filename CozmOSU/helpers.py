@@ -1,5 +1,5 @@
-import cozmo;
-import math;
+import cozmo
+import math
 
 """
 RGB to Light (color)

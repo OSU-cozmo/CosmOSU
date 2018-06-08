@@ -34,6 +34,7 @@ def moveHead(self, degrees : float, speed : int = 10):
     #Execute head movement action
     self.robot.set_head_angle(degrees, speed).wait_for_completed()
     self.setHeadState(degrees.degrees)
+    
 #Use this as a method for robot
 Robot.moveHead = moveHead
 

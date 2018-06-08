@@ -9,8 +9,8 @@ Python Docs
 
   Python 3 :  home_
 
-  .. _link: https://docs.python.org/3/
+  .. _home: https://docs.python.org/3/
 
   Data Types : types_
 
-  .. _link: https://docs.python.org/3/library/stdtypes.html
+  .. _types: https://docs.python.org/3/library/stdtypes.html
