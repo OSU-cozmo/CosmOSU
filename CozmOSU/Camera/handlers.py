@@ -3,6 +3,8 @@ import numpy as np
 import cv2
 import cozmo 
 
+
+#REFACTOR !!! check if still being used.
 ZONES_HEAD_DOWN = {
     '2' : (255, 295),
     '4' : (200, 255),
@@ -18,12 +20,28 @@ ZONES_HEAD_ZERO = {
 
 ZONES_CUR = ZONES_HEAD_ZERO
 
+#END REFACTOR !!!
+
 WARP_HEAD_DOWN = [[135,0],[165,0],[10,200],[310,200]]
 WARP_HEAD_ZERO = [[135,120],[165,120],[10,200],[310,200]]
 
 WARP_CUR = WARP_HEAD_ZERO
 
-def setHeadState(self, angle : float):
+
+
+def setHeadState(self, angle : float) -> None:
+    """Modifies the area of interest (AOI) that the camera evaluates.
+        
+        .. note::
+
+            This is generally not front facing code, and is called when the head is moved. If this is called with a value different from the position of the head, all line results will be erraneous. 
+
+        Arguments:
+            Angle: An angle representing the new position of the head. This must be 0 or -25.
+
+    """
+
+    #Modifies global settings to match the new state
     global WARP_CUR
     global ZONES_CUR
     if angle == 0:
@@ -34,15 +52,33 @@ def setHeadState(self, angle : float):
         WARP_CUR = WARP_HEAD_DOWN
         ZONES_CUR = ZONES_HEAD_DOWN
 
+#Use this as a method for robot
 Robot.setHeadState = setHeadState
 
-def areLinesVisible(self):
-    if len(self.visibleLines) > 0:
+def areLinesVisible(self) -> list:
+    """Gets the lines that have been seen since the last call to this method
 
+        .. note::
+
+            When this is called, it clears the list of previously seen lines.
+    """
+
+    #If lines have been seen
+    if len(self.visibleLines) > 0:
+        
+        #save the lines
         temp = self.visibleLines
+
+        #empty the list in the class
         self.visibleLines = []
+
+        #return the saved version
         return temp
-    return None
+
+    #if none found, return empty list
+    return []
+
+#Use this as a method for robot
 Robot.areLinesVisible = areLinesVisible
 
 
