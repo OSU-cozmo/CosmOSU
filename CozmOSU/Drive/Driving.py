@@ -1,5 +1,6 @@
 from ..Robot import Robot
 import cozmo
+import time
 from cozmo.util import degrees, distance_mm, speed_mmps
 
 def driveForward(self, distance : float, speed : float):
