@@ -23,7 +23,7 @@ sys.path.insert(0, os.path.abspath('../..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'CosmOSU'
+project = 'CozmOSU'
 copyright = '2018, authors'
 authors = ['Tasman Thenell', 'Mason Sidebottom']
 
@@ -111,7 +111,7 @@ html_sidebars = {'**' : ['localtoc.html', 'relations.html', 'sourcelink.html', '
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'CosmOSUdoc'
+htmlhelp_basename = 'CozmOSUdoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -138,7 +138,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'CosmOSU.tex', 'CosmOSU Documentation',
+    (master_doc, 'CozmOSU.tex', 'CozmOSU Documentation',
      authors, 'manual'),
 ]
 
@@ -148,7 +148,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'cosmosu', 'CosmOSU Documentation',
+    (master_doc, 'cozmosu', 'CozmOSU Documentation',
      authors, 1)
 ]
 
@@ -159,8 +159,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'CosmOSU', 'CosmOSU Documentation',
-     authors, 'CosmOSU', 'One line description of project.',
+    (master_doc, 'CozmOSU', 'CozmOSU Documentation',
+     authors, 'CozmOSU', 'One line description of project.',
      'Miscellaneous'),
 ]
 

@@ -1,4 +1,4 @@
-.. CosmOSU documentation master file, created by
+.. CozmOSU documentation master file, created by
    sphinx-quickstart on Tue Apr 24 18:12:02 2018.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -10,8 +10,10 @@ CozmOSU
 
     Robot <robot.rst>
     Actions <actions.rst>
+    Camera <camera.rst>
     Driving <driving.rst>
     Examples <examples.rst>
+    Resources <resources.rst>
 
 
 
