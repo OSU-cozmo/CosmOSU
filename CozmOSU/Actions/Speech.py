@@ -4,6 +4,10 @@ from ..Robot import Robot
 def say(self, msg : str):
     """Cozmo will say the message.
 
+    .. note::
+
+        If you would like to say a math expression, use robot.sayMath(...).
+
     Arguments:
 
         msg : A string that cozmo will say.
@@ -39,7 +43,7 @@ def sayMath(self, msg : str):
 
     .. code-block:: python
 
-        robot.say("5 - 10 = -5")
+        robot.sayMath("5 - 10 = -5")
 
     """
 

@@ -1,7 +1,11 @@
+private.testing/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+
+.settings.*
 
 # C extensions
 *.so

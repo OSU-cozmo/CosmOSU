@@ -3,6 +3,8 @@ import numpy as np
 import cv2
 import cozmo 
 
+
+#REFACTOR !!! check if still being used.
 ZONES_HEAD_DOWN = {
     '2' : (255, 295),
     '4' : (200, 255),
@@ -18,12 +20,28 @@ ZONES_HEAD_ZERO = {
 
 ZONES_CUR = ZONES_HEAD_ZERO
 
+#END REFACTOR !!!
+
 WARP_HEAD_DOWN = [[135,0],[165,0],[10,200],[310,200]]
 WARP_HEAD_ZERO = [[135,120],[165,120],[10,200],[310,200]]
 
 WARP_CUR = WARP_HEAD_ZERO
 
-def setHeadState(self, angle : float):
+
+
+def setHeadState(self, angle : float) -> None:
+    """Modifies the area of interest (AOI) that the camera evaluates.
+        
+        .. note::
+
+            This is generally not front facing code, and is called when the head is moved. If this is called with a value different from the position of the head, all line results will be erraneous. 
+
+        Arguments:
+            Angle: An angle representing the new position of the head. This must be 0 or -25.
+
+    """
+
+    #Modifies global settings to match the new state
     global WARP_CUR
     global ZONES_CUR
     if angle == 0:
@@ -34,14 +52,34 @@ def setHeadState(self, angle : float):
         WARP_CUR = WARP_HEAD_DOWN
         ZONES_CUR = ZONES_HEAD_DOWN
 
+#Use this as a method for robot
 Robot.setHeadState = setHeadState
 
-def isLineInZone(self, zone : int = 4):
-    if self.linesInZone is not None:
-        return self.linesInZone[str(zone)]
-    return None
+def areLinesVisible(self) -> list:
+    """Gets the lines that have been seen since the last call to this method
 
-Robot.isLineInZone = isLineInZone
+        .. note::
+
+            When this is called, it clears the list of previously seen lines.
+    """
+
+    #If lines have been seen
+    if len(self.visibleLines) > 0:
+        
+        #save the lines
+        temp = self.visibleLines
+
+        #empty the list in the class
+        self.visibleLines = []
+
+        #return the saved version
+        return temp
+
+    #if none found, return empty list
+    return []
+
+#Use this as a method for robot
+Robot.areLinesVisible = areLinesVisible
 
 
 def detectLines(self, event, *, image: cozmo.world.CameraImage, **kw):
@@ -58,21 +96,24 @@ def detectLines(self, event, *, image: cozmo.world.CameraImage, **kw):
     # lines = getProbablisticHoughLines(cvIm)
     h, w, z = wrp.shape
     
-    visLines = {'2' : None}
+    visLines = []
     if lines is not None and len(lines) > 0:
          for line in lines:
-            visLines[line['zone']] = False
-
             for h in line['lines']:
-                
-                visLines[line['zone']] = True
+                visLines.append(getRealY(h, line['zone']))
                 y = getRealY(h, line['zone'])
                 cv2.line(wrp, (0, y), (w, y), (0, 0, 255), 2)
 
     storeImg(wrp, "warpLines")
-    self.linesInZone = visLines
-
+    self.lineIterations = self.lineIterations + 1
+    self.updateLines(visLines)
 Robot.detectLines = detectLines 
+
+def updateLines(self, lines):
+    self.visibleLines = self.visibleLines + lines
+
+Robot.updateLines = updateLines
+
 
 def getAllLines(img):
     img = prepareImage(img)
@@ -91,7 +132,8 @@ def prepareImage(img):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     img = cv2.blur(img, (4, 4))
 
-    t, img = cv2.threshold(img, 200, 255, cv2.THRESH_BINARY)
+    t, img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
+    storeImg(img, "thresh1")
     img = cv2.adaptiveThreshold(img, 127, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 5, 1)
     storeImg(img, "postprocess")
     return img

@@ -2,19 +2,30 @@ import CozmOSU
 import time
 
 
-def main(robot : CozmOSU.Robot):
-    # robot.resetHead()
-    # robot.resetLift()
+def calib(robot):
+    robot.calibrateToLine(0.9)
 
-    robot.moveHead(0)
-    robot.moveLift(1)
-    while not robot.isLineInZone(4):
-        robot.driveForward(15, 50)
+def main(robot : CozmOSU.Robot):
+    while True:
+        robot.driveForward(10, 20)
+        lines = robot.areLinesVisible()
+        if lines is not None:
+            stop = False
+            for line in lines:
+                if line > 290:
+                    stop = True
+                    break
+        if stop:
+            break
 
 r = CozmOSU.Robot()
 
-r.stayOnCharger()
-r.watchForLines()
-r.enableCamera()
-r.start(main)
 
+r.watchForLines()
+r.enableCamera(True, False)
+
+#uncomment to test driving with polling
+# r.start(main)
+
+#comment out if testing
+r.start(calib)
