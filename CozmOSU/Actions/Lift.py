@@ -4,7 +4,7 @@ from cozmo.robot import MAX_LIFT_HEIGHT, MIN_LIFT_HEIGHT
 #To do, add funcitonality for mm and inches
 
 
-def moveLift(self, height, speed = 25):
+def moveLift(self, height : float, speed : int = 25):
     """Moves lift to a specified height.
 
     Arguments:

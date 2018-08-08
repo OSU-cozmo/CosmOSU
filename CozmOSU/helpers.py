@@ -20,7 +20,7 @@ Hex to RGB (color)
 """
 def hexToRBG(color):
 
-    #drop the 0x from the front of the dring
+    #drop the 0x from the front of the string
     if "0x" in color[:2]:
         color = color[2:]
 

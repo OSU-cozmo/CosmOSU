@@ -3,6 +3,7 @@ import logging
 import threading
 import asyncio
 from time import sleep
+
 class Robot:
     robot = -1
     _startOn = -1
@@ -35,7 +36,7 @@ class Robot:
 
         self.programAlive = True
 
-    def debug(self, msg : str):
+    def debug(self, msg : str) -> None:
         """If debugging is toggled, prints the message to the sreen
 
         Arguments:
@@ -48,7 +49,7 @@ class Robot:
             self.log.debug(msg)
 
 
-    def debugToggle(self):
+    def debugToggle(self) -> None:
         """Turn on and off debugging."""
         #if not __debug__:
         self.dbg = not self.dbg
@@ -56,7 +57,7 @@ class Robot:
     #        self.log.warning("Cannot turn off debugging when '-o' argument provided")
 
 
-    def start(self, startOn):
+    def start(self, startOn) -> None:
         """Create the cozmo robot and begin executing the function provided
 
             Arguments:
@@ -68,7 +69,12 @@ class Robot:
         #Allows us to hide the actual Cozmo robot
         cozmo.run_program(self._begin)
 
-    def getRobot(self):
+    def getRobot(self) -> cozmo.robot:
+        """Gets the Cozmo.robot
+
+            Purpose : Allows front facing code to still access the Cozmo robot directly
+
+        """
         return self.robot
 
     async def taskHandler(self):
@@ -86,10 +92,9 @@ class Robot:
         
 
 
-
-    def _begin(self, cozmo):
+    def _begin(self, cozmo) -> None:
         """
-            Purpose: provides a way to store the actual cozmo robot as a member of this class.
+            Purpose: provides a way to store the cozmo robot as a member of this class.
             Parameters: cozmo robot object
         """
         self.userThread = threading.Thread(target=self._startOn, args=(self,))

@@ -39,7 +39,7 @@ def sayMath(self, msg : str):
 
     .. code-block:: python
 
-        robot.say("5 - 10 = -5")
+        robot.sayMath("5 - 10 = -5")
 
     """
 

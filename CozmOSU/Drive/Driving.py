@@ -3,12 +3,19 @@ import cozmo
 import time
 from cozmo.util import degrees, distance_mm, speed_mmps
 
-def driveForward(self, distance : float, speed : float):
-    """Directs Cozmo to travel forward.
+def driveForward(self, distance : float, speed : float = 50):
+    """Moves Cozmo forward or backwards.
 
     Arguments:
-        distance: How far, in millimeters, Cozmo should travel.
-        speed: An integer speed at which to drive. Measured in millimeters per second.
+        distance : A float representing the distance in millimeters for cozmo to travel.
+            - Positive : Moves Cozmo forward.
+            - Negative : Moves Cozmo backward.
+        speed : A float representing the speed, in millimeters per seconds, for Cozmo to travel at.
+            - 50 (default)
+
+    .. code-block:: python
+
+        robot.driveForward(100, 20)
     """
     #Convert parameters into Cozmo classes that represent the units 
     realDistance = distance_mm(distance)
@@ -80,10 +87,16 @@ def driveLeftWheel(self, speed, duration):
 # def driveToLocation(): # Absolute location relative to known world
 
 def turn(self, angle : float): #in degrees
-    """Rotate Cozmo an amount from the current position.
+    """Rotates Cozmo in place.
 
     Arguments:
-        angle: Angle in degrees that Cozmo should turn.
+        angle: A float representing the angle, in degrees, that Cozmo should turn.
+            - Positive : Left turn.
+            - Negative : Right turn.
+
+    .. code-block:: python
+
+        robot.turn(90)
     """
     #Convert parameter into Cozmo angle unit class
     rotationAngle = degrees(angle)
