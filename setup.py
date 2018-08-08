@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name = 'CosmOSU',
+    name = 'CozmOSU',
     version = '0.1',
     description = 'Wrapper library for the cozmo api',
     url = 'https://github.com/OSU-cozmo/OSU-Cozmo-Library',
