@@ -8,6 +8,13 @@ Camera
 
 .. currentmodule:: CozmOSU
 
+
+Handlers
+========
+
+    .. autofunction:: areLinesVisible
+
+
 Settings
 ========
 

@@ -26,12 +26,14 @@ def moveLift(self, height : float, speed : int = 25):
     #Execute actual lift action
     self.robot.set_lift_height(height, speed).wait_for_completed()
 
-#Use this as a method for robot
-Robot.moveLift = moveLift
 
 def resetLift(self):
     """Puts the lift back to the ground."""
     self.moveLift(0)
 
-#Use this as a method for robot
-Robot.resetLift = resetLift
+
+###################################################################
+# Functions Exported to CozmoBot                                  #
+###################################################################
+Robot.resetLift                     = resetLift
+Robot.moveLift                      = moveLift

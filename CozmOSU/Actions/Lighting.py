@@ -21,8 +21,6 @@ def getCubeByID(self, id : int):
     #return the correct cube
     return self.robot.world.get_light_cube(id)
 
-#Use this as a method for robot
-Robot.getCubeByID = getCubeByID
 
 def setCubeColor(self, id : int, color : tuple):
     """Sets all lights on cube to a specific color.
@@ -54,8 +52,6 @@ def setCubeColor(self, id : int, color : tuple):
     #set the lights
     cube.set_lights(light)
 
-#Use this as a method for robot
-Robot.setCubeColor = setCubeColor
 
 
 def setCubeColorHex(self, id : int, color : str):
@@ -87,8 +83,6 @@ def setCubeColorHex(self, id : int, color : str):
     #call set cube color with new color
     self.setCubeColor(id, col)
 
-#Use this as a method for robot
-Robot.setCubeColorHex = setCubeColorHex
 
 def setCubeColorRGB(self, id : int, red : int, green : int, blue : int):
     """Sets all lights on cube to a specific color using expanded RGB.
@@ -114,8 +108,6 @@ def setCubeColorRGB(self, id : int, red : int, green : int, blue : int):
     #call set color
     self.setCubeColor(id, color)
 
-#Use this as a method for robot
-Robot.setCubeColorRGB = setCubeColorRGB
 
 
 def setCubeColorHSV(self, id : int, h : int, s : float, v : float):
@@ -139,8 +131,6 @@ def setCubeColorHSV(self, id : int, h : int, s : float, v : float):
     #set cube color, after converting to RGB
     self.setCubeColor(id, hsvToRGB((h,s,v)))
 
-#Use this as a method for robot
-Robot.setCubeColorHSV = setCubeColorHSV
 
 def setCubeCorners(self, id : int, colors : list):
     """Set the each light on a cube individually.
@@ -177,8 +167,6 @@ def setCubeCorners(self, id : int, colors : list):
     #set the corners *lights is list expansion
     cube.set_light_corners(*lights)
 
-#Use this as a method for robot
-Robot.setCubeCorners = setCubeCorners
 
 
 def setCubeCornersHex(self, id : int, hex1 : str, hex2 : str, hex3 : str, hex4 : str):
@@ -210,8 +198,6 @@ def setCubeCornersHex(self, id : int, hex1 : str, hex2 : str, hex3 : str, hex4 :
     #call set cube corners
     self.setCubeCorners(id, colors)
 
-#Use this as a method for robot
-Robot.setCubeCornersHex = setCubeCornersHex
 
 
 def setAllBackpackLights(self, color : tuple):
@@ -228,8 +214,6 @@ def setAllBackpackLights(self, color : tuple):
     #Call cozmo function
     self.robot.set_all_backpack_lights(rgbToLight(color))
 
-#Use this as a method for robot
-Robot.setAllBackpackLights = setAllBackpackLights
 
 
 def setAllBackpackLightsRGB(self, r : int, g : int, b : int):
@@ -247,8 +231,6 @@ def setAllBackpackLightsRGB(self, r : int, g : int, b : int):
     #create tuple of RGB then call setAllBackpackLights
     self.setAllBackpackLights((r,g,b))
 
-#Use this as a method for robot
-Robot.setAllBackpackLightsRGB = setAllBackpackLightsRGB
 
 
 def setAllBackpackLightsHex(self, color : str):
@@ -274,8 +256,6 @@ def setAllBackpackLightsHex(self, color : str):
     #set the backpack lights
     self.setBackpackLights(col)
 
-#Use this as a method for robot
-Robot.setAllBackpackLightsHex = setAllBackpackLightsHex
 
 
 def setAllBackpackLightsHSV(self, h : int, s : float, v : float):
@@ -293,8 +273,6 @@ def setAllBackpackLightsHSV(self, h : int, s : float, v : float):
     #convert to RGB then call set all backpack lights
     self.setAllBackpackLights(hsvToRGB((h,s,v)))
 
-#Use this as a method for robot
-Robot.setAllBackpackLightsHSV = setAllBackpackLightsHSV
 
 
 def setBackpackLights(self, colors : list):
@@ -351,5 +329,25 @@ def setBackpackLights(self, colors : list):
     #set the lights
     self.robot.set_backpack_lights(*lights)
 
-#Use this as a method for robot
-Robot.setBackpackLights = setBackpackLights
+
+
+
+###################################################################
+# Functions Exported to CozmoBot                                  #
+###################################################################
+
+Robot.setBackpackLights             = setBackpackLights
+Robot.getCubeByID                   = getCubeByID
+
+Robot.setCubeCorners                = setCubeCorners
+Robot.setCubeCornersHex             = setCubeCornersHex
+
+Robot.setCubeColorHSV               = setCubeColorHSV
+Robot.setCubeColorRGB               = setCubeColorRGB
+Robot.setCubeColorHex               = setCubeColorHex
+Robot.setCubeColor                  = setCubeColor
+
+Robot.setAllBackpackLightsHSV       = setAllBackpackLightsHSV
+Robot.setAllBackpackLightsHex       = setAllBackpackLightsHex
+Robot.setAllBackpackLightsRGB       = setAllBackpackLightsRGB
+Robot.setAllBackpackLights          = setAllBackpackLights

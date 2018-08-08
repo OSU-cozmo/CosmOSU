@@ -13,11 +13,11 @@ class Robot:
     fileRecorders = {}
     asyncTasks = []
 
-    #Set by self.start(...)
-    robot = None    #cozmo.robot.Robot
+    # set by self.start(...)
+    robot = None    # cozmo.robot.Robot
     _startOn = None # callable
     
-    #built on init
+    # built on init
     log = None      # logging.logger
 
     dbg = False
@@ -25,7 +25,7 @@ class Robot:
     
     kwargDict = {}
     
-    #Array of start events.
+    # Array of start events.
     #   start events are dictionaries with the form
     #       {
     #           'function': callable,
@@ -36,36 +36,37 @@ class Robot:
     #       ex. (True,)
     startEvts = []
     
-    #Vertical location of all lines since last evaluation
+    #V ertical location of all lines since last evaluation
     visibleLines = []
 
-    #Iterations of camera handlers since last evaluation
+    # Iterations of camera handlers since last evaluation
     lineIterations = 0
     
     def __init__(self):
         """Initializes an instance of the CozmOsu.Robot object."""
         
-        #!!! REFACTOR THIS -> MOVE GENERATE LOGGER TO HELPERS !!!
+        # !!! REFACTOR THIS -> MOVE GENERATE LOGGER TO HELPERS !!!
 
-        #Adding a logger to the robot class
-        #easier to quicky indicate errors/warnings
-        #specific to the robot
+        # Adding a logger to the robot class
+        #   easier to quicky indicate errors/warnings
+        #   specific to the robot
         logger = logging.getLogger('Robot')
         logger.setLevel(logging.DEBUG)
 
         ch = logging.StreamHandler()
         ch.setLevel(logging.DEBUG)
 
-        #Logs look like
-        #Robot - ERROR : This is an Error
+        # Logs look like
+        #   Robot - ERROR : This is an Error
         formatter = logging.Formatter('%(name)s - %(levelname)s\t: %(message)s')
-        #using tab to line up all messages
+        # using tab to line up all messages
 
         ch.setFormatter(formatter)
 
         logger.addHandler(ch)
         self.log = logger
 
+        # !REFACTOR -> This may not be needed anymore
         self.programAlive = True
 
     def debug(self, msg : str) -> None:
@@ -79,7 +80,7 @@ class Robot:
 
         """
 
-        #Dont always show debbugging messages
+        # Dont always show debbugging messages
         if self.dbg:
             self.log.debug(msg)
 
@@ -92,7 +93,7 @@ class Robot:
             - If debugging on, then turn off.
             - If debugging off, then turn on.
         """
-        #if not __debug__:
+        # if not __debug__:
         self.dbg = not self.dbg
     #    else:
     #        self.log.warning("Cannot turn off debugging when '-o' argument provided")
@@ -108,8 +109,8 @@ class Robot:
 
         self._startOn = startOn
 
-        #calls proxy to the the start on function
-        #Allows us to hide the actual Cozmo robot
+        # calls proxy to the the start on function
+        # Allows us to hide the actual Cozmo robot
         cozmo.run_program(self._begin, **self.kwargDict)
 
     def getRobot(self) -> cozmo.robot:
@@ -121,41 +122,71 @@ class Robot:
         return self.robot
 
     async def taskHandler(self):
+        """Handles asynchronous tasks
+
+            .. warning::
+
+                This is not front facing, do not call this outside of class.
+
+        """
+
+        # While the front facing thread is active
         while self.userThread.isAlive():
+
+            # Iterate through pending async tasks 
             for x in self.asyncTasks:
+
+                # Add the task to the event loop
                 asyncio.ensure_future(x['func'](*x['args']))
+
+                # The task is no longer pending, remove it
                 self.asyncTasks.remove(x)
+
+            # wait 1/10th of a second before next iteration
             await asyncio.sleep(0.1)
 
+        # User thread is done, start shutdown
         self.cleanShutdown()
 
     def cleanShutdown(self):
-        if self.userThread.isAlive():
-            self.userThread.join()
+        """Cleans up threads.
+
+            .. warning::
+
+                This is not front facing, do not call this outside of class.
+
+        """
+      
+
+        # Join the thread
+        self.userThread.join()
         
+        # Might need to add asyncio cleanup
 
 
     def _begin(self, cozmo) -> None:
+        """Wraps the cozmo librarys run_program, to allow wrapper to work.
+
+            .. warning::
+
+                This is not fron facing, do not call this outside of class.
         """
-            Purpose: provides a way to store the cozmo robot as a member of this class.
-            Parameters: cozmo robot object
-        """
+
+        # Create user thread
         self.userThread = threading.Thread(target=self._startOn, args=(self,))
       
-        #acts as a separator for the other output from cozmo
+        # acts as a separator for the other output from cozmo
 
         print("\n\n\t------STARTING------\n")
 
-        #store the robot
+        # store the robot
         self.robot = cozmo
 
-        #Execute all post initialization operations before user
+        # Execute all post initialization operations before user
         #   can interact with robot
         self.postInit()
 
-        #start the function
-        # self._startOn(self)
-        
+        # start the thread        
         self.userThread.start()
 
         #start all background tasks
@@ -166,6 +197,7 @@ class Robot:
         #execution will resume here
         print("\n\t------  DONE  ------\n\n")
         
+        # Clean up file handlers
         for x in self.fileRecorders:
             if not self.fileRecorders[x].closed:
                 self.fileRecorders[x].close()

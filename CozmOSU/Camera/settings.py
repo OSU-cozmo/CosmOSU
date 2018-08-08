@@ -41,8 +41,6 @@ def enableCamera(self,  viewer : bool = False, color : bool = True) -> None:
     #REFACTOR !!! This should be vestigial
     self.linesInZone = None
 
-#Use this as a method for robot
-Robot.enableCamera = enableCamera
 
 def cameraInit(self, color : bool) -> None:
     """Initialize the camera with the provided settings.
@@ -55,8 +53,6 @@ def cameraInit(self, color : bool) -> None:
     self.robot.camera.image_stream_enabled = True
     self.robot.camera.color_image_enabled = color
 
-#Use this as a method for robot
-Robot.cameraInit = cameraInit
 
 
 # REFACTOR !!! range may be vestigial 
@@ -81,8 +77,6 @@ def watchForLines(self, range : int = 1) -> None:
     #Add the dict to the start events
     self.startEvts.append(callafter)
 
-#Use this as a method for robot
-Robot.watchForLines = watchForLines
 
 #REFACTOR !!! range may be vestigial
 def createLineBinding(self, range : int = 1) -> None:
@@ -111,8 +105,6 @@ def createLineBinding(self, range : int = 1) -> None:
     #Set the exposure on the robots camera
     self.robot.camera.set_manual_exposure(self.exposure, self.gain)
 
-#Use this as a method for robot
-Robot.createLineBinding = createLineBinding
 
 def calibrateExposure(self, accuracy: float = 0.8, distance : int = 60, start : int = 1) -> tuple:
     """Calibrates the exposure of the camera to detect lines at a specific distance.
@@ -229,8 +221,6 @@ def calibrateExposure(self, accuracy: float = 0.8, distance : int = 60, start : 
 
     return  (lines, exp, gain[step]) 
 
-#Use this as a method for robot
-Robot.calibrateExposure = calibrateExposure
 
 
 def calibrateToLine(self, accuracy: float = 0.8, distance: int = 60) -> None:
@@ -263,8 +253,6 @@ def calibrateToLine(self, accuracy: float = 0.8, distance: int = 60) -> None:
     info = self.calibrateExposure(accuracy, distance)
     self.log.info("found lines %s, with exposure %d, and gain %2.1f" % (info[0], info[1], info[2]))
 
-#Use this as a method for robot
-Robot.calibrateToLine = calibrateToLine
 
 
 def exportSettings(self):
@@ -290,7 +278,6 @@ def exportSettings(self):
     #close the file
     file.close()
 
-Robot.exportSettings = exportSettings
 
 def importSettings(self) -> bool:
     """Import the settings from a file in the current directory called '.settings.cozmo'. This does not apply settings.
@@ -314,7 +301,15 @@ def importSettings(self) -> bool:
             self.gain = float(line.split(':')[1])
 
             
-    file.close
+    file.close()
+    
     return True
 
 Robot.importSettings = importSettings
+Robot.exportSettings = exportSettings
+Robot.calibrateToLine = calibrateToLine
+Robot.calibrateExposure = calibrateExposure
+Robot.createLineBinding = createLineBinding
+Robot.watchForLines = watchForLines
+Robot.enableCamera = enableCamera
+Robot.cameraInit = cameraInit

@@ -83,33 +83,62 @@ Robot.areLinesVisible = areLinesVisible
 
 
 def detectLines(self, event, *, image: cozmo.world.CameraImage, **kw):
+    """Event called by cozmo every time a new image is recorded
+
+        .. warning::
+
+            This should not be called, only bound as an event. 
+
+    """
     
+    # Convert to an array
     cvIm = np.array(image.raw_image)
+
     # Convert RGB to BGR
     cvIm = cvIm[:, :, ::-1].copy()
     cvIm = cvIm[40:, :]
-    wrp = warp(cvIm)
-    storeImg(cvIm, "std")
     
+    # Warp the image
+    wrp = warp(cvIm)
+
+    # Save the initial and warped image (use for debugging)    
+    storeImg(cvIm, "std")
     storeImg(wrp, "WARPED")
+
     lines = getAllLines(wrp)
     # lines = getProbablisticHoughLines(cvIm)
+
+    # Get height and width
     h, w, z = wrp.shape
     
     visLines = []
+
+    # For all the lines found
     if lines is not None and len(lines) > 0:
          for line in lines:
             for h in line['lines']:
+
+                # Get actual height of the line and add to vislines
                 visLines.append(getRealY(h, line['zone']))
+            
+                # Draw the line on an image
                 y = getRealY(h, line['zone'])
                 cv2.line(wrp, (0, y), (w, y), (0, 0, 255), 2)
 
+    # Store the image
     storeImg(wrp, "warpLines")
+    
+    # Increment sample count
     self.lineIterations = self.lineIterations + 1
+    
+    # Add new lines to all
     self.updateLines(visLines)
+
+
 Robot.detectLines = detectLines 
 
 def updateLines(self, lines):
+    """Adds lines to total lines"""
     self.visibleLines = self.visibleLines + lines
 
 Robot.updateLines = updateLines
@@ -186,7 +215,7 @@ def findLines(img):
             starts.append(y)
             buf = 3
         if buf > 0:
-            buf = buf - 1
+            buf -= 1
 
     gapThresh = 5
     lines = []
@@ -199,19 +228,19 @@ def findLines(img):
         for x in range(w):
             if img[row][x] == 0:
                 gapSize = 0        
-                length = length + 1
+                length += 1
             elif row != h - 1 and img[row + 1][x] == 0:
-                deltaY = deltaY + 1
+                deltaY += 1
                 gapSize = 0        
-                length = length + 1
-                row = row + 1                
+                length += 1
+                row += 1                
             elif row != 1 and img[row - 1][x] == 0:     
-                deltaY = deltaY - 1
+                deltaY -= 1
                 gapSize = 0        
-                length = length + 1
-                row = row - 1
+                length += 1
+                row -= 1
             else:
-                gapSize = gapSize + 1
+                gapSize += 1
                 if gapSize > gapThresh:
                     break
         if length >= thresh and deltaY <= yThesh:

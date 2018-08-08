@@ -16,5 +16,3 @@ Driving
 
   .. autofunction:: turn
 
-Navigation
-==========
