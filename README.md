@@ -17,5 +17,5 @@ pip install -e .
 
 ## Usage
 ```
-import OSUCozmoLibrary as robot;
+import CozmOSU as robot;
 ```

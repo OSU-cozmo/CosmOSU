@@ -6,13 +6,15 @@
 CozmOSU
 ***********
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 2
 
-   Robot <robot.rst>
-   Actions <actions.rst>
-   Camera <camera.rst>
-   Examples <examples.rst>
-   Resources <resources.rst>
+    Robot <robot.rst>
+    Actions <actions.rst>
+    Camera <camera.rst>
+    Driving <driving.rst>
+    Examples <examples.rst>
+    Resources <resources.rst>
+
 
 
 
@@ -21,29 +23,29 @@ CozmOSU
 Installation
 ============
 
-  Clone the repository_.
+    Clone the repository_.
 
-  .. _repository : https://github.com/OSU-cozmo/CosmOSU
+    .. _repository : https://github.com/OSU-cozmo/CosmOSU
 
-  Then in the root directory run:
+    Then in the root directory run:
 
-  ``pip install -e .``
+    ``pip install -e .``
 
 Hello World
 =============
 
-  .. code-block:: python
+    .. code-block:: python
 
 
-      import CozmOSU as Robot
+        import CozmOSU as Robot
 
-      robot = Robot.Robot();
+        robot = Robot.Robot();
 
-      def main(cozmo : Robot.Robot):
+        def main(cozmo : Robot.Robot):
 
-          cozmo.say("Hello World");
+            cozmo.say("Hello World");
 
-      robot.start(main);
+        robot.start(main);
 
 Indices and tables
 ==================
