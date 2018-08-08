@@ -1,6 +1,7 @@
 from ..Robot import Robot
 import time
 import asyncio
+
 def calibrateLevelPitch(self, length : float = 1.0, samples : int = 20) -> float:
     avg = 0
 
@@ -19,7 +20,7 @@ def calibrateLevelPitch(self, length : float = 1.0, samples : int = 20) -> float
     return avg
 
 def getCurrentPitch(self) -> float:
-    return round(self.robot.pose_pitch.degrees - self.levelPitch, 3)
+    return round(self.robot.pose_pitch.degrees - self.levelPitch, 2)
 
 def recordPitch(self, fileName, deltaTime : float = 0.5) -> None:
     if 'pitch' in self.fileRecorders:
