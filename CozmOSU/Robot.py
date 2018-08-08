@@ -1,11 +1,16 @@
 import cozmo
 import logging
+import threading
+import asyncio
+from time import sleep
 
 class Robot:
     robot = -1
     _startOn = -1
     dbg = False
     log = -1
+    fileRecorders = {}
+    asyncTasks = []
 
 
     def __init__(self):
@@ -29,7 +34,7 @@ class Robot:
         logger.addHandler(ch)
         self.log = logger
 
-
+        self.programAlive = True
 
     def debug(self, msg : str) -> None:
         """If debugging is toggled, prints the message to the sreen
@@ -72,12 +77,28 @@ class Robot:
         """
         return self.robot
 
+    async def taskHandler(self):
+        while self.userThread.isAlive():
+            for x in self.asyncTasks:
+                asyncio.ensure_future(x['func'](*x['args']))
+                self.asyncTasks.remove(x)
+            await asyncio.sleep(0.1)
+
+        self.cleanShutdown()
+
+    def cleanShutdown(self):
+        if self.userThread.isAlive():
+            self.userThread.join()
+        
+
 
     def _begin(self, cozmo) -> None:
         """
             Purpose: provides a way to store the cozmo robot as a member of this class.
             Parameters: cozmo robot object
         """
+        self.userThread = threading.Thread(target=self._startOn, args=(self,))
+      
         #acts as a separator for the other output from cozmo
         print("\n\n\t------STARTING------\n")
 
@@ -85,6 +106,19 @@ class Robot:
         self.robot = cozmo
 
         #start the function
-        self._startOn(self)
+        # self._startOn(self)
+        
+        self.userThread.start()
 
+        #start all background tasks
+        asyncio.ensure_future(self.taskHandler())
+        asyncio.get_event_loop().run_until_complete(asyncio.gather(*(asyncio.Task.all_tasks())))
+        #once the user thread ends, clean shutdown will be called by task handler.
+
+        #execution will resume here
         print("\n\t------  DONE  ------\n\n")
+    
+
+        for x in self.fileRecorders:
+            if not self.fileRecorders[x].closed:
+                self.fileRecorders[x].close()
