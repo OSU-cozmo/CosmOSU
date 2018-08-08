@@ -71,6 +71,7 @@ class Robot:
 
     def debug(self, msg : str) -> None:
         """If debugging is on, prints the message to the sreen
+        
         .. note::
             
             If debugging is not on, the message will not be shown.
@@ -113,7 +114,7 @@ class Robot:
         # Allows us to hide the actual Cozmo robot
         cozmo.run_program(self._begin, **self.kwargDict)
 
-    def getRobot(self) -> cozmo.robot:
+    def getRobot(self):
         """Gets the Cozmo.robot
 
             Purpose : Allows front facing code to still access the Cozmo robot directly
