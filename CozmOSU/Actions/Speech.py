@@ -23,8 +23,6 @@ def say(self, msg : str):
     #Execute say text action
     self.robot.say_text(msg).wait_for_completed()
 
-#Use this as a member function for robot
-Robot.say = say
 
 def sayMath(self, msg : str):
     """Cozmo will say the message. Should contain math.
@@ -56,22 +54,45 @@ def sayMath(self, msg : str):
     #Execute say text action
     self.robot.say_text(msg).wait_for_completed()
 
-#Use this as a member function for robot
-Robot.sayMath = sayMath
+
+
+###################################################################
+# Functions Exported to CozmoBot                                  #
+###################################################################
+
+Robot.say                           = say
+Robot.sayMath                       = sayMath
 
 def checkNegative(exp : str) -> str:
-    s = exp.split()
+    """Parses string to convert '-' to negative or minus"""
+    
+    # Split on whitespace
+    s = exp.split() 
+
+    # Make empty final string
     final = ""
     first = True
+
+    #For all the split strings
     for i in range(len(s)):
+        
+        # If string is in form -XXX convert to negative
         templ = len(s[i])
         if templ > 1 and s[i][1:].isnumeric() and s[i][0] == '-':
             s[i] = 'negative ' + s[i][1:]
+        
+        # Else convert to minus
         elif '-' in s[i]:
              s[i] = s[i].replace('-', 'minus')
 
+        # If not the first, add a space (no leading whitespace)
         if not first:
             s[i] = " " + s[i]
+
+        # Add temp to final
         final = final + s[i]
+
+        # Add whitespace between the rest
         first = False
+        
     return final
