@@ -10,7 +10,6 @@ CozmOSU
 
     Robot <robot.rst>
     Actions <actions.rst>
-    Camera <camera.rst>
     Driving <driving.rst>
     Examples <examples.rst>
     Resources <resources.rst>
