@@ -1,6 +1,12 @@
 from ..Robot import Robot
+from typing import Union
+def getVisibleCube(self) -> Union[int, None]:
+    """Gets a cube in Cozmos field of view (FOV)
 
-def getVisibleCube(self):
+    Returns:
+        - An int representing the ID of the light cube that was found.
+        - If no cube was found, returns None.
+    """
     cube = None
     try:
         cube = self.robot.world.wait_for_observed_light_cube(timeout = 1)

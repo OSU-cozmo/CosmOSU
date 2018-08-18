@@ -16,3 +16,7 @@ Driving
 
   .. autofunction:: turn
 
+Navigation
+==========
+
+  .. autofunction:: pickupCube

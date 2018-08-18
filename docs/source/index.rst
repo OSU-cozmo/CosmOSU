@@ -5,30 +5,19 @@
 
 CozmOSU
 ***********
-.. toctree::
-    :maxdepth: 2
-
-    Robot <robot.rst>
-    Actions <actions.rst>
-    Driving <driving.rst>
-    Examples <examples.rst>
-    Resources <resources.rst>
-
-
-
-
 
 
 Installation
 ============
 
-    Clone the repository_.
+    Clone the repository_ to a permanant location.
 
     .. _repository : https://github.com/OSU-cozmo/CosmOSU
 
     Then in the root directory run:
 
     ``pip install -e .``
+
 
 Hello World
 =============
@@ -45,6 +34,21 @@ Hello World
             cozmo.say("Hello World");
 
         robot.start(main);
+
+Documents
+=========
+
+    .. toctree::
+        :maxdepth: 2
+
+        Robot <robot.rst>
+        Actions <actions.rst>
+        Driving <driving.rst>
+        Sensors <sensors.rst>
+        Examples <examples.rst>
+        Resources <resources.rst>
+
+
 
 Indices and tables
 ==================

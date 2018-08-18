@@ -24,11 +24,10 @@ def getCubeByID(self, id : int):
 
 def setCubeColor(self, id : int, color : tuple):
     """Sets all lights on cube to a specific color.
-
+    
     Arguments:
-        id : An integer representing a cube id.
-
-        color : A tuple representing a rgb color. ex ``(255, 0, 0)``.
+        id: An integer representing a cube id.
+        color: A tuple representing a rgb color. ex ``(255, 0, 0)``.
 
     .. code-block:: python
 

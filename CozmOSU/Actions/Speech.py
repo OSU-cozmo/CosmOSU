@@ -9,7 +9,6 @@ def say(self, msg : str):
         If you would like to say a math expression, use robot.sayMath(...).
 
     Arguments:
-
         msg : A string that cozmo will say.
 
     .. code-block:: python
@@ -36,7 +35,6 @@ def sayMath(self, msg : str):
         This will have undefined behavior if the message should say 'dash' and 'minus'/'negative'.
 
     Arguments:
-
         msg : A string that cozmo will say, containing math.
 
     .. code-block:: python
