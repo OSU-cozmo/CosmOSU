@@ -7,10 +7,10 @@ def driveForward(self, distance : float, speed : float = 50):
     """Moves Cozmo forward or backwards.
 
     Arguments:
-        distance : A float representing the distance in millimeters for cozmo to travel.
-            - Positive : Moves Cozmo forward.
-            - Negative : Moves Cozmo backward.
-        speed : A float representing the speed, in millimeters per seconds, for Cozmo to travel at.
+        distance: A float representing the distance in millimeters for cozmo to travel.
+            - Positive: Moves Cozmo forward.
+            - Negative: Moves Cozmo backward.
+        speed: A float representing the speed, in millimeters per seconds, for Cozmo to travel at.
             - 50 (default)
 
     .. code-block:: python
@@ -91,8 +91,8 @@ def turn(self, angle : float): #in degrees
 
     Arguments:
         angle: A float representing the angle, in degrees, that Cozmo should turn.
-            - Positive : Left turn.
-            - Negative : Right turn.
+            - Positive: Left turn.
+            - Negative: Right turn.
 
     .. code-block:: python
 
