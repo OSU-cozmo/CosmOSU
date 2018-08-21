@@ -1,6 +1,6 @@
 from ..Robot import Robot
 from typing import Union
-def getVisibleCube(self) -> Union[int, None]:
+def getVisibleCube(self, timeout : int = 1) -> Union[int, None]:
     """Gets a cube in Cozmos field of view (FOV)
 
     Returns:
@@ -9,7 +9,7 @@ def getVisibleCube(self) -> Union[int, None]:
     """
     cube = None
     try:
-        cube = self.robot.world.wait_for_observed_light_cube(timeout = 1)
+        cube = self.robot.world.wait_for_observed_light_cube(timeout = timeout)
         print(cube.cube_id)
         self.setCubeColor(cube.cube_id, (0,255,0))
     except:
