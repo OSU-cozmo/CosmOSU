@@ -17,15 +17,23 @@ def calibrateLevelPitch(self, length : float = 1.0, samples : int = 20) -> float
     """
     avg = 0
 
+    
     for i in range(samples):
+        # Running total of all pitches
         avg += self.robot.pose_pitch.degrees
+
+        # wait
         time.sleep(length/samples)
 
+    # Get average and save
     avg = avg / samples
     self.levelPitch = avg
+
+    # Log info
     self.log.info("Pitch Calibrated")
     self.debug("Level Pitch set to %.2f" % self.levelPitch)
 
+    # Clear the file if it already exits.
     if 'pitch' in self.fileRecorders:
         self.fileRecorders['pitch'].truncate(0)
 
@@ -47,6 +55,7 @@ def getCurrentPitch(self) -> float:
             robot.getCurrentPitch()
 
     """
+    # Get pitch, use calibrated level. Round to 2 decimal places
     return round(self.robot.pose_pitch.degrees - self.levelPitch, 2)
 
 def recordPitch(self, fileName : str = "pitch-data.txt" , deltaTime : float = 0.5) -> None:
@@ -68,11 +77,15 @@ def recordPitch(self, fileName : str = "pitch-data.txt" , deltaTime : float = 0.
             robot.recordPitch("pitch-data.txt", 0.1)
 
     """
+
+    # Make sure to not duplicate file recorder
     if 'pitch' in self.fileRecorders:
         return
+    
+    # Create new file
     self.fileRecorders['pitch'] = open(fileName, "w+")
 
-
+    # Append a task to record
     self.asyncTasks.append({
         'func' : self.pitchRecorder,
         'args' : (deltaTime,)
@@ -80,8 +93,22 @@ def recordPitch(self, fileName : str = "pitch-data.txt" , deltaTime : float = 0.
     
    
 async def pitchRecorder(self, deltaTime):
+    """Records pitch to a file asynchronously.
+
+
+    .. warning::
+
+        This is not front facing. Task must be spawned internally.
+
+    """
+    
+    # Verify that the thread is active
     while self.userThread.isAlive():
+
+        # Write the new pitch to the file
         self.fileRecorders['pitch'].write("%.2f\n" % self.getCurrentPitch())
+
+        # await
         await asyncio.sleep(deltaTime) 
         
 

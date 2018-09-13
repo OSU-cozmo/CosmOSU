@@ -18,10 +18,15 @@ def pickupCube(self, id : int):
 
         robot.pickupCube(2)
     """
+    # Check valid ID
     if id not in [1, 2, 3]:
+
+        #Generate warning if invalid
         self.log.warning("Id should be 1, 2, or 3.")
         self.log.error("Id provided was %s.\n" % str(id))
         return
+
+    # Execute action forced synchronous      
     self.robot.pickup_object(self.getCubeByID(id), num_retries = 3).wait_for_completed()
 
 
